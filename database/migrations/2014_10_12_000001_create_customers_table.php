@@ -17,6 +17,9 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->unsignedBigInteger('id_witel');
+            $table->string('divisi');
+            $table->string('nama_pelanggan');
+            $table->string('permintaan');
             $table->string('solusi');
             $table->date('tgl_input');
             $table->date('tgl_selesai');
@@ -27,6 +30,7 @@ return new class extends Migration
             $table->string('perkiraan_budget');
             $table->string('keterangan');
             $table->timestamps();
+
 
             $table->foreign('id_witel')->references('id')->on('witels')  ->update('cascade')->delete('cascade');
         });
