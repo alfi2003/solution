@@ -13,6 +13,9 @@ class Customer extends Model
     protected $fillable = [
         'name',
         'id_witel',
+        'divisi',
+        'nama_pelanggan',
+        'permintaan',
         'solusi',
         'tgl_input',
         'tgl_selesai',

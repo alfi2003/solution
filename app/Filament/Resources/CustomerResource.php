@@ -25,28 +25,44 @@ class CustomerResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('name')    ->required(),
-
-                Forms\Components\Select::make('id_witel')   ->label('Witel')
-                                                            ->options(Witel::all()->pluck('witel', 'id'))
-                                                            ->required()
-                                                            ->searchable(),
 
                 Forms\Components\DatePicker::make('tgl_input')  ->label('Tanggal Input')
                                                                 ->required(),
 
+                Forms\Components\Select::make('id_witel')   ->label('Witel')
+                                                                ->options(Witel::all()->pluck('witel', 'id'))
+                                                                ->required()
+                                                                ->searchable(),
+
+                Forms\Components\Select::make('divisi')   ->label('Divisi')
+                                                                ->options([
+                                                                    'enterprise' => 'Enterprise',
+                                                                    'government' => 'Government',
+                                                                    'business' => 'Business',
+                                                                ]),
+
+                Forms\Components\TextInput::make('name')    ->label('Nama AM/Hero')
+                                                            ->required(),
+
+                Forms\Components\TextInput::make('nama_pelanggan')  ->label('Nama Pelanggan')
+                                                                    ->required(),
+
+                Forms\Components\TextInput::make('permintaan')  ->label('Permintaan')
+                                                                    ->required(),
+
+
                 Forms\Components\DatePicker::make('tgl_selesai')    ->label('Tanggal Selesai')
                                                                     ->required(),
 
-                Forms\Components\FileUpload::make('solusi') ->label('File Upload')
+                Forms\Components\FileUpload::make('solusi') ->label('Solusi')
                                                             ->maxSize(1024)
                                                             ->required(),
 
                 Forms\Components\Select::make('jenis_produk')   ->label('Jenis Produk')
                                                                 ->options([
-                                                                    'draft' => 'Draft',
-                                                                    'reviewing' => 'Reviewing',
-                                                                    'published' => 'Published',
+                                                                    'connectivity' => 'Connectivity',
+                                                                    'digital' => 'Digital Solution',
+                                                                    'data' => 'Data',
                                                                 ]),
 
                 Forms\Components\Select::make('kategori')        ->label('Kategori')
