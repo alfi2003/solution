@@ -13,6 +13,7 @@ use Filament\Resources\Table;
 use Filament\Tables;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Filament\Forms\Components\TextInput;
 
 class CustomerResource extends Resource
 {
@@ -60,8 +61,10 @@ class CustomerResource extends Resource
                 Forms\Components\TextInput::make('lokasi')  ->label('Lokasi')
                                                             ->required(),
 
-                Forms\Components\TextInput::make('perkiraan_budget')    ->label('Perkiraan Budget')
-                                                                        ->required(),
+                // Forms\Components\TextInput::make('perkiraan_budget')    ->label('Perkiraan Budget')
+                //                                                         ->required(),
+
+                Forms\Components\TextInput::make('perkiraan_budget')->mask(fn (TextInput\Mask $mask) => $mask->money(prefix: 'Rp. ', thousandsSeparator: ',', decimalPlaces: 2, isSigned: false))->required(),
 
 
                 Forms\Components\MarkdownEditor::make('keterangan')->toolbarButtons([
@@ -89,23 +92,55 @@ class CustomerResource extends Resource
                                                         ->color('primary')
                                                         ->searchable(),
                 // Witel
-                Tables\Columns\TextColumn::make('id_witel') ->label('Witel')
+                Tables\Columns\TextColumn::make('witels.witel') ->label('Witel')
                                                             ->sortable()
                                                             ->searchable(),
                 // Tgl Input
                 Tables\Columns\TextColumn::make('tgl_input') ->label('Tanggal Input')
                                                                 ->sortable()
                                                                 ->searchable(),
-                // Witel
+                // Tgl Selesai
                 Tables\Columns\TextColumn::make('tgl_selesai') ->label('Tanggal Selesai')
                                                                 ->sortable()
                                                                 ->searchable(),
+                // Jenis Produk
+                Tables\Columns\TextColumn::make('jenis_produk') ->label('Jenis Produk')
+                                                                ->sortable()
+                                                                ->searchable(),
+                // Kategori
+                Tables\Columns\TextColumn::make('kategori') ->label('Kategori')
+                                                                ->sortable()
+                                                                ->searchable(),
+                // Jumlah
+                Tables\Columns\TextColumn::make('jumlah') ->label('Jumlah')
+                                                                ->sortable()
+                                                                ->searchable(),
+                // Lokasi
+                Tables\Columns\TextColumn::make('lokasi') ->label('Lokasi')
+                                                                ->sortable()
+                                                                ->searchable(),
+                // Perkiraan Budget
+                Tables\Columns\TextColumn::make('perkiraan_budget') ->label('Perkiraan Budget')
+                                                                    ->money('idr')
+                                                                    ->sortable()
+                                                                    ->searchable(),
+                // Keterangan
+                Tables\Columns\TextColumn::make('keterangan') ->label('Keterangan')
+                                                                ->sortable()
+                                                                ->searchable(),
+
+
             ])
+
             ->filters([
                 //
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
+                Tables\Actions\ActionGroup::make([
+                    Tables\Actions\DeleteAction::make(),
+                    Tables\Actions\EditAction::make(),
+                    Tables\Actions\ViewAction::make(),
+                ]),
             ])
             ->bulkActions([
                 Tables\Actions\DeleteBulkAction::make(),

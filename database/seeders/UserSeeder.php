@@ -22,6 +22,12 @@ class UserSeeder extends Seeder
                 'id_witel'  => 1,
                 'email'     => 'admin@gmail.com',
                 'password'  => Hash::make('admin123'),
+            ],
+            [
+                'name'      => 'user',
+                'id_witel'  => 1,
+                'email'     => 'user@gmail.com',
+                'password'  => Hash::make('admin123'),
             ]
         ]);
     }

@@ -6,26 +6,23 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Witel;
 
-class Customer extends Model
+class Solusi extends Model
 {
     use HasFactory;
 
+    protected $table='solusis';
+
     protected $fillable = [
         'name',
-        'id_witel',
         'solusi',
-        'tgl_input',
-        'tgl_selesai',
-        'jenis_produk',
-        'kategori',
-        'jumlah',
-        'lokasi',
-        'perkiraan_budget',
-        'keterangan',
+        'tanggal',
+        'id_witel',
     ];
 
     public function witels()
     {
         return $this->belongsTo(Witel::class, 'id_witel', 'id');
     }
+
+
 }
