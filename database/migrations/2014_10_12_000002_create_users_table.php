@@ -16,11 +16,14 @@ return new class extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->unsignedBigInteger('id_witel');
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();
+
+            $table->foreign('id_witel')->references('id')->on('witels')  ->update('cascade')->delete('cascade');
         });
     }
 
