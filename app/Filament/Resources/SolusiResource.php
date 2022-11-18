@@ -17,8 +17,11 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 class SolusiResource extends Resource
 {
     protected static ?string $model = Solusi::class;
-
-    protected static ?string $navigationIcon = 'heroicon-o-collection';
+    // protected static ?string $title = 'name';
+    // protected static ?string $slug = 'custom-url-slug';
+    protected static ?int $navigationSort = 2;
+    protected static ?string $navigationLabel = 'Solusi';
+    protected static ?string $navigationIcon = 'heroicon-o-annotation';
 
     public static function form(Form $form): Form
     {
