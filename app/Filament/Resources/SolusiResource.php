@@ -42,7 +42,7 @@ class SolusiResource extends Resource
                 // File
                 Forms\Components\FileUpload::make('solusi') ->label('Solusi')
                                                             ->required()
-                                                            ->maxSize(1024),
+                                                            ->maxSize(2024),
             ]);
     }
 
