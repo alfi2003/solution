@@ -23,6 +23,10 @@ class ProdukResource extends Resource
     {
         return $form
             ->schema([
+
+                Forms\Components\TextInput::make('name')->required(),
+
+
                 Forms\Components\FileUpload::make('produk') ->label('Produk')
                 ->maxSize(1024)
                 ->required(),
@@ -46,6 +50,11 @@ class ProdukResource extends Resource
     {
         return $table
             ->columns([
+
+                //Nama
+                Tables\Columns\TextColumn::make('name')->label('Nama')
+                                                        ->sortable()
+                                                        ->searchable(),
                 // Produk
                 Tables\Columns\ImageColumn::make('produk')->size(150),
 
