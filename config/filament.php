@@ -139,8 +139,11 @@ return [
         'namespace' => 'App\\Filament\\Widgets',
         'path' => app_path('Filament/Widgets'),
         'register' => [
-            Widgets\AccountWidget::class,
-            Widgets\FilamentInfoWidget::class,
+            // Widgets\AccountWidget::class,
+            // Widgets\FilamentInfoWidget::class,
+            App\Filament\Widgets\StatsOverview::class,
+            App\Filament\Widgets\ProdukChart::class,
+            App\Filament\Widgets\ProdukChartBar::class,
         ],
     ],
 
