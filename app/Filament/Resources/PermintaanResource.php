@@ -16,6 +16,8 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\DatePicker;
+use Filament\Widgets\StatsOverviewWidget\Card;
+use DB;
 
 class PermintaanResource extends Resource
 {
@@ -36,15 +38,15 @@ class PermintaanResource extends Resource
                                                                 ->required()
                                                                 ->searchable(),
 
-                Forms\Components\Select::make('divisi')   ->label('Divisi')
-                                                                ->options([
-                                                                    'enterprise' => 'Enterprise',
-                                                                    'government' => 'Government',
-                                                                    'business' => 'Business',
-                                                                ]),
-
                 Forms\Components\TextInput::make('name')    ->label('Nama AM/Hero')
                                                             ->required(),
+
+                Forms\Components\Select::make('divisi')   ->label('Divisi')
+                                                            ->options([
+                                                                'enterprise' => 'Enterprise',
+                                                                'government' => 'Government',
+                                                                'business' => 'Business',
+                                                            ]),
 
                 Forms\Components\TextInput::make('no_telp')  ->label('No Telp')
                                                                     ->required(),
@@ -54,9 +56,9 @@ class PermintaanResource extends Resource
 
                 Forms\Components\Select::make('jenis_produk')   ->label('Jenis Produk')
                                                                     ->options([
-                                                                        'connectivity' => 'Connectivity',
-                                                                        'digital' => 'Digital Solution',
-                                                                        'data' => 'Data',
+                                                                        'connectivity' => 'Digital Connectivity',
+                                                                        'service' => 'Digital Service',
+                                                                        'platform' => 'Platform',
                                                                     ]),
 
                 Forms\Components\MarkdownEditor::make('deskripsi')->toolbarButtons([
