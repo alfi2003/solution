@@ -14,6 +14,8 @@ use Filament\Tables;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\FileUpload;
+use Filament\Forms\Components\DatePicker;
 
 class PermintaanResource extends Resource
 {
@@ -44,57 +46,81 @@ class PermintaanResource extends Resource
                 Forms\Components\TextInput::make('name')    ->label('Nama AM/Hero')
                                                             ->required(),
 
+                Forms\Components\TextInput::make('no_telp')  ->label('No Telp')
+                                                                    ->required(),
+
                 Forms\Components\TextInput::make('nama_pelanggan')  ->label('Nama Pelanggan')
                                                                     ->required(),
 
-                Forms\Components\TextInput::make('permintaan')  ->label('Permintaan')
-                                                                    ->required(),
-
-
-                Forms\Components\DatePicker::make('tgl_selesai')    ->label('Tanggal Selesai')
-                                                                    ->required(),
-
-                Forms\Components\FileUpload::make('solusi') ->label('Solusi')
-                                                            ->maxSize(1024)
-                                                            ->required(),
-
                 Forms\Components\Select::make('jenis_produk')   ->label('Jenis Produk')
-                                                                ->options([
-                                                                    'connectivity' => 'Connectivity',
-                                                                    'digital' => 'Digital Solution',
-                                                                    'data' => 'Data',
-                                                                ]),
+                                                                    ->options([
+                                                                        'connectivity' => 'Connectivity',
+                                                                        'digital' => 'Digital Solution',
+                                                                        'data' => 'Data',
+                                                                    ]),
 
-                Forms\Components\Select::make('kategori')        ->label('Kategori')
-                                                                 ->options([
-                                                                     'draft' => 'Draft',
-                                                                     'reviewing' => 'Reviewing',
-                                                                     'published' => 'Published',
-                                                                 ]),
-                Forms\Components\TextInput::make('jumlah')  ->label('Jumlah')
-                                                            ->required(),
+                Forms\Components\MarkdownEditor::make('deskripsi')->toolbarButtons([
+                                                                        'attachFiles',
+                                                                        'bold',
+                                                                        'bulletList',
+                                                                        'codeBlock',
+                                                                        'edit',
+                                                                        'italic',
+                                                                        'link',
+                                                                        'orderedList',
+                                                                        'preview',
+                                                                        'strike',
+                ]),
 
-                Forms\Components\TextInput::make('lokasi')  ->label('Lokasi')
-                                                            ->required(),
+                Forms\Components\FileUpload::make('lampiran') ->label('Lampiran')
+                                                                    ->maxSize(1024)
+                                                                    ->required(),
 
-                // Forms\Components\TextInput::make('perkiraan_budget')    ->label('Perkiraan Budget')
-                //                                                         ->required(),
+                Forms\Components\DatePicker::make('dateline')    ->label('Dateline')
+                                                                    ->required(),
 
-                Forms\Components\TextInput::make('perkiraan_budget')->mask(fn (TextInput\Mask $mask) => $mask->money(prefix: 'Rp. ', thousandsSeparator: ',', decimalPlaces: 2, isSigned: false))->required(),
-
-
+                Forms\Components\Select::make('status')   ->label('Status')
+                                                            ->options([
+                                                                        'input' => 'Input',
+                                                                        'progess' => 'On Progress',
+                                                                        'solved' => 'Solved',
+                                                                    ]),
                 Forms\Components\MarkdownEditor::make('keterangan')->toolbarButtons([
-                                                                                    'attachFiles',
-                                                                                    'bold',
-                                                                                    'bulletList',
-                                                                                    'codeBlock',
-                                                                                    'edit',
-                                                                                    'italic',
-                                                                                    'link',
-                                                                                    'orderedList',
-                                                                                    'preview',
-                                                                                    'strike',
-                                                                                ])
+                                                                        'attachFiles',
+                                                                        'bold',
+                                                                        'bulletList',
+                                                                        'codeBlock',
+                                                                        'edit',
+                                                                        'italic',
+                                                                        'link',
+                                                                        'orderedList',
+                                                                        'preview',
+                                                                        'strike',
+                ]),
+
+                Forms\Components\FileUpload::make('lampiran2') ->label('Lampiran Lanjutan')
+                                                                    ->maxSize(1024)
+                                                                    ->required(),
+
+                // Forms\Components\Select::make('kategori')        ->label('Kategori')
+                //                                                  ->options([
+                //                                                      'draft' => 'Draft',
+                //                                                      'reviewing' => 'Reviewing',
+                //                                                      'published' => 'Published',
+                //                                                  ]),
+                // Forms\Components\TextInput::make('jumlah')  ->label('Jumlah')
+                //                                             ->required(),
+
+                // Forms\Components\TextInput::make('lokasi')  ->label('Lokasi')
+                //                                             ->required(),
+
+                // // Forms\Components\TextInput::make('perkiraan_budget')    ->label('Perkiraan Budget')
+                // //                                                         ->required(),
+
+                // Forms\Components\TextInput::make('perkiraan_budget')->mask(fn (TextInput\Mask $mask) => $mask->money(prefix: 'Rp. ', thousandsSeparator: ',', decimalPlaces: 2, isSigned: false))->required(),
+
+
+
             ]);
     }
 
@@ -102,48 +128,63 @@ class PermintaanResource extends Resource
     {
         return $table
             ->columns([
+                // Tgl Selesai
+                Tables\Columns\TextColumn::make('dateline') ->label('Datelina')
+                                                                ->sortable()
+                                                                ->searchable(),
+
+                // Witel
+                Tables\Columns\TextColumn::make('witels.witel') ->label('Witel')
+                                                            ->sortable()
+                                                            ->searchable(),
+
                 // Name
                 Tables\Columns\TextColumn::make('name') ->sortable()
                                                         // ->icon('heroicon-s-user')
                                                         ->color('primary')
                                                         ->searchable(),
-                // Witel
-                Tables\Columns\TextColumn::make('witels.witel') ->label('Witel')
-                                                            ->sortable()
-                                                            ->searchable(),
-                // Tgl Input
-                Tables\Columns\TextColumn::make('tgl_input') ->label('Tanggal Input')
-                                                                ->sortable()
-                                                                ->searchable(),
-                // Tgl Selesai
-                Tables\Columns\TextColumn::make('tgl_selesai') ->label('Tanggal Selesai')
-                                                                ->sortable()
-                                                                ->searchable(),
+                // Pelanggan
+                Tables\Columns\TextColumn::make('nama_pelanggan') ->sortable()
+                                                        // ->icon('heroicon-s-user')
+                                                        ->color('primary')
+                                                        ->searchable(),
+
                 // Jenis Produk
                 Tables\Columns\TextColumn::make('jenis_produk') ->label('Jenis Produk')
                                                                 ->sortable()
                                                                 ->searchable(),
-                // Kategori
-                Tables\Columns\TextColumn::make('kategori') ->label('Kategori')
+
+                // Status
+                Tables\Columns\TextColumn::make('status') ->label('Status')
                                                                 ->sortable()
                                                                 ->searchable(),
-                // Jumlah
-                Tables\Columns\TextColumn::make('jumlah') ->label('Jumlah')
-                                                                ->sortable()
-                                                                ->searchable(),
-                // Lokasi
-                Tables\Columns\TextColumn::make('lokasi') ->label('Lokasi')
-                                                                ->sortable()
-                                                                ->searchable(),
-                // Perkiraan Budget
-                Tables\Columns\TextColumn::make('perkiraan_budget') ->label('Perkiraan Budget')
-                                                                    ->money('idr')
-                                                                    ->sortable()
-                                                                    ->searchable(),
-                // Keterangan
-                Tables\Columns\TextColumn::make('keterangan') ->label('Keterangan')
-                                                                ->sortable()
-                                                                ->searchable(),
+                // // Tgl Input
+                // Tables\Columns\TextColumn::make('tgl_input') ->label('Tanggal Input')
+                //                                                 ->sortable()
+                //                                                 ->searchable(),
+
+
+                // // Kategori
+                // Tables\Columns\TextColumn::make('kategori') ->label('Kategori')
+                //                                                 ->sortable()
+                //                                                 ->searchable(),
+                // // Jumlah
+                // Tables\Columns\TextColumn::make('jumlah') ->label('Jumlah')
+                //                                                 ->sortable()
+                //                                                 ->searchable(),
+                // // Lokasi
+                // Tables\Columns\TextColumn::make('lokasi') ->label('Lokasi')
+                //                                                 ->sortable()
+                //                                                 ->searchable(),
+                // // Perkiraan Budget
+                // Tables\Columns\TextColumn::make('perkiraan_budget') ->label('Perkiraan Budget')
+                //                                                     ->money('idr')
+                //                                                     ->sortable()
+                //                                                     ->searchable(),
+                // // Keterangan
+                // Tables\Columns\TextColumn::make('keterangan') ->label('Keterangan')
+                //                                                 ->sortable()
+                //                                                 ->searchable(),
             ])
             ->filters([
                 //

@@ -24,7 +24,8 @@ class ProdukResource extends Resource
         return $form
             ->schema([
 
-                Forms\Components\TextInput::make('name')->required(),
+                Forms\Components\TextInput::make('name')->label('Nama')
+                                                        ->required(),
 
 
                 Forms\Components\FileUpload::make('produk') ->label('Produk')

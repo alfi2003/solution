@@ -15,20 +15,20 @@ return new class extends Migration
     {
         Schema::create('permintaan', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->date('tgl_input');
             $table->unsignedBigInteger('id_witel');
             $table->string('divisi');
+            $table->string('name');
+            $table->string('no_telp');
             $table->string('nama_pelanggan');
-            $table->string('permintaan');
-            $table->string('solusi');
-            $table->date('tgl_input');
-            $table->date('tgl_selesai');
             $table->string('jenis_produk');
-            $table->string('kategori');
-            $table->string('jumlah');
-            $table->string('lokasi');
-            $table->string('perkiraan_budget');
+            $table->string('deskripsi');
+            $table->string('lampiran');
+            $table->date('dateline');
+            $table->string('status');
             $table->string('keterangan');
+            $table->string('lampiran2');
+
             $table->timestamps();
 
 

@@ -12,20 +12,21 @@ class Permintaan extends Model
     protected $table = 'permintaan';
 
     protected $fillable = [
-        'name',
+        'tgl_input',
         'id_witel',
         'divisi',
+        'name',
+        'no_telp',
         'nama_pelanggan',
-        'permintaan',
-        'solusi',
-        'tgl_input',
-        'tgl_selesai',
         'jenis_produk',
-        'kategori',
-        'jumlah',
-        'lokasi',
-        'perkiraan_budget',
+        'deskripsi',
+        'lampiran',
+        'dateline',
+        'status',
         'keterangan',
+        'lampiran2',
+
+
     ];
 
     public function witels()
