@@ -2,9 +2,9 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\CustomerResource\Pages;
-use App\Filament\Resources\CustomerResource\RelationManagers;
-use App\Models\Customer;
+use App\Filament\Resources\PermintaanResource\Pages;
+use App\Filament\Resources\PermintaanResource\RelationManagers;
+use App\Models\Permintaan;
 use App\Models\Witel;
 use Filament\Forms;
 use Filament\Resources\Form;
@@ -15,18 +15,17 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Filament\Forms\Components\TextInput;
 
-class CustomerResource extends Resource
+class PermintaanResource extends Resource
 {
-    protected static ?string $model = Customer::class;
+    protected static ?string $model = Permintaan::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-collection';
     protected static ?string $navigationLabel = 'Permintaan';
+    protected static ?string $navigationIcon = 'heroicon-o-collection';
 
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
-
                 Forms\Components\DatePicker::make('tgl_input')  ->label('Tanggal Input')
                                                                 ->required(),
 
@@ -145,10 +144,7 @@ class CustomerResource extends Resource
                 Tables\Columns\TextColumn::make('keterangan') ->label('Keterangan')
                                                                 ->sortable()
                                                                 ->searchable(),
-
-
             ])
-
             ->filters([
                 //
             ])
@@ -174,9 +170,9 @@ class CustomerResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListCustomers::route('/'),
-            'create' => Pages\CreateCustomer::route('/create'),
-            'edit' => Pages\EditCustomer::route('/{record}/edit'),
+            'index' => Pages\ListPermintaans::route('/'),
+            'create' => Pages\CreatePermintaan::route('/create'),
+            'edit' => Pages\EditPermintaan::route('/{record}/edit'),
         ];
     }
 }

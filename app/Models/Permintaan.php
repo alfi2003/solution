@@ -4,11 +4,12 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\Witel;
 
-class Customer extends Model
+class Permintaan extends Model
 {
     use HasFactory;
+
+    protected $table = 'permintaan';
 
     protected $fillable = [
         'name',
@@ -32,3 +33,5 @@ class Customer extends Model
         return $this->belongsTo(Witel::class, 'id_witel', 'id');
     }
 }
+
+
