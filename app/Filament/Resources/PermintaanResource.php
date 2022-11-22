@@ -81,12 +81,26 @@ class PermintaanResource extends Resource
                 Forms\Components\DatePicker::make('dateline')    ->label('Dateline')
                                                                     ->required(),
 
-                Forms\Components\Select::make('status')   ->label('Status')
-                                                            ->options([
-                                                                        'input' => 'Input',
-                                                                        'progess' => 'On Progress',
-                                                                        'solved' => 'Solved',
-                                                                    ]),
+                // Forms\Components\Select::make('status')   ->label('Status')
+                //                                             ->options([
+                //                                                         'input' => 'Input',
+                //                                                         'progess' => 'On Progress',
+                //                                                         'solved' => 'Solved',
+                //                                                     ]),
+
+                Forms\Components\Radio::make('status')->label('Status')
+                                                         ->options([
+                                                         'input' => 'Input',
+                                                         'progres' => 'On Progres',
+                                                        'solved' => 'Solved',
+                                                        'closed' => 'Closed'
+                                                         ]),
+
+
+                Forms\Components\FileUpload::make('lampiran2') ->label('Lampiran Lanjutan')
+                                                                    ->maxSize(1024)
+                                                                    ->required(),
+
                 Forms\Components\MarkdownEditor::make('keterangan')->toolbarButtons([
                                                                         'attachFiles',
                                                                         'bold',
@@ -99,10 +113,6 @@ class PermintaanResource extends Resource
                                                                         'preview',
                                                                         'strike',
                 ]),
-
-                Forms\Components\FileUpload::make('lampiran2') ->label('Lampiran Lanjutan')
-                                                                    ->maxSize(1024)
-                                                                    ->required(),
 
                 // Forms\Components\Select::make('kategori')        ->label('Kategori')
                 //                                                  ->options([
