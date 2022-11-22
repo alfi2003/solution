@@ -18,6 +18,7 @@ use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\DatePicker;
 use Filament\Widgets\StatsOverviewWidget\Card;
 use DB;
+use PhpParser\Node\Stmt\Label;
 
 class PermintaanResource extends Resource
 {
@@ -30,8 +31,12 @@ class PermintaanResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\DatePicker::make('tgl_input')  ->label('Tanggal Input')
-                                                                ->required(),
+
+                Forms\Components\DatePicker::make('tgl_input')
+                                                        ->label('Tanggal Input')
+                                                        ->default(now())
+                                                        ->disabled(),
+
 
                 Forms\Components\Select::make('id_witel')   ->label('Witel')
                                                                 ->options(Witel::all()->pluck('witel', 'id'))
@@ -141,7 +146,7 @@ class PermintaanResource extends Resource
         return $table
             ->columns([
                 // Tgl Selesai
-                Tables\Columns\TextColumn::make('dateline') ->label('Datelina')
+                Tables\Columns\TextColumn::make('dateline') ->label('Dateline')
                                                                 ->sortable()
                                                                 ->searchable(),
 
